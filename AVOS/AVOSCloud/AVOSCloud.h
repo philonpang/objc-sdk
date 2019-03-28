@@ -30,9 +30,6 @@
 #import "AVFile.h"
 #import "AVFileQuery.h"
 
-// Geo
-#import "AVGeoPoint.h"
-
 // Status
 #import "AVStatus.h"
 

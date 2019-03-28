@@ -10,7 +10,6 @@
 #import "AVUtils.h"
 #import "AVObject.h"
 #import "AVObject_Internal.h"
-#import "AVGeoPoint_Internal.h"
 #import "AVUser.h"
 #import "AVUser_Internal.h"
 #import "AVObject.h"

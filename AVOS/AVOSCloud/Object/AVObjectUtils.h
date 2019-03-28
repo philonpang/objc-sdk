@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "AVGlobal.h"
-#import "AVGeoPoint.h"
 #import "AVACL.h"
 #import "AVObject.h"
 
@@ -20,7 +19,6 @@
 +(NSDate *)dateFromDictionary:(NSDictionary *)dict;
 +(NSDate *)dateFromString:(NSString *)string;
 +(NSData *)dataFromDictionary:(NSDictionary *)dict;
-+(AVGeoPoint *)geoPointFromDictionary:(NSDictionary *)dict;
 +(AVACL *)aclFromDictionary:(NSDictionary *)dict;
 +(NSObject *)objectFromDictionary:(NSDictionary *)dict;
 + (NSObject *)objectFromDictionary:(NSDictionary *)dict recursive:(BOOL)recursive;
@@ -34,7 +32,6 @@
 +(NSMutableDictionary *)dictionaryFromDictionary:(NSDictionary *)dic;
 +(NSMutableArray *)dictionaryFromArray:(NSArray *)array;
 +(NSDictionary *)dictionaryFromAVObjectPointer:(AVObject *)object;
-+(NSDictionary *)dictionaryFromGeoPoint:(AVGeoPoint *)point;
 +(NSDictionary *)dictionaryFromDate:(NSDate *)date;
 +(NSDictionary *)dictionaryFromData:(NSData *)data;
 +(NSDictionary *)dictionaryFromFile:(AVFile *)file;

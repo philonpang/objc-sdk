@@ -2,14 +2,12 @@
 // Copyright 2013 AVOS, Inc. All rights reserved.
 
 #import <Foundation/Foundation.h>
-#import "AVGeoPoint.h"
 #import "AVObject_Internal.h"
 #import "AVQuery.h"
 #import "AVUtils.h"
 #import "AVPaasClient.h"
 #import "AVPaasClient_internal.h"
 #import "AVUser_Internal.h"
-#import "AVGeoPoint_Internal.h"
 #import "AVCacheManager.h"
 #import "AVInstallation_Internal.h"
 #import "AVErrorUtils.h"
@@ -304,70 +302,6 @@ NSString *LCStringFromDistanceUnit(AVQueryDistanceUnit unit) {
 - (void)whereKey:(NSString *)key containsAllObjectsInArray:(NSArray *)array
 {
     NSDictionary * dict = @{@"$all": array };
-    [self addWhereItem:dict forKey:key];
-}
-
-- (void)whereKey:(NSString *)key nearGeoPoint:(AVGeoPoint *)geoPoint
-{
-    NSDictionary * dict = @{@"$nearSphere" : [AVGeoPoint dictionaryFromGeoPoint:geoPoint]};
-    [self addWhereItem:dict forKey:key];
-}
-
-- (void)whereKey:(NSString *)key nearGeoPoint:(AVGeoPoint *)geoPoint withinMiles:(double)maxDistance
-{
-    NSDictionary * dict = @{@"$nearSphere" : [AVGeoPoint dictionaryFromGeoPoint:geoPoint], @"$maxDistanceInMiles":@(maxDistance)};
-    [self addWhereItem:dict forKey:key];
-}
-
-- (void)whereKey:(NSString *)key nearGeoPoint:(AVGeoPoint *)geoPoint withinKilometers:(double)maxDistance
-{
-    NSDictionary * dict = @{@"$nearSphere" : [AVGeoPoint dictionaryFromGeoPoint:geoPoint], @"$maxDistanceInKilometers":@(maxDistance)};
-    [self addWhereItem:dict forKey:key];
-}
-
-- (void)whereKey:(NSString *)key nearGeoPoint:(AVGeoPoint *)geoPoint withinRadians:(double)maxDistance
-{
-    NSDictionary * dict = @{@"$nearSphere" : [AVGeoPoint dictionaryFromGeoPoint:geoPoint], @"$maxDistanceInRadians":@(maxDistance)};
-    [self addWhereItem:dict forKey:key];
-}
-
-- (void)whereKey:(NSString *)key
-    nearGeoPoint:(AVGeoPoint *)geoPoint
-     maxDistance:(double)maxDistance
- maxDistanceUnit:(AVQueryDistanceUnit)maxDistanceUnit
-     minDistance:(double)minDistance
- minDistanceUnit:(AVQueryDistanceUnit)minDistanceUnit
-{
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-
-    dict[@"$nearSphere"] = [AVGeoPoint dictionaryFromGeoPoint:geoPoint];
-
-    NSString *unitString = nil;
-
-    if (maxDistance >= 0 && (unitString = LCStringFromDistanceUnit(maxDistanceUnit))) {
-        NSString *querySelector = [NSString stringWithFormat:@"$maxDistanceIn%@", [unitString capitalizedString]];
-        dict[querySelector] = @(maxDistance);
-    }
-
-    if (minDistance >= 0 && (unitString = LCStringFromDistanceUnit(minDistanceUnit))) {
-        NSString *querySelector = [NSString stringWithFormat:@"$minDistanceIn%@", [unitString capitalizedString]];
-        dict[querySelector] = @(minDistance);
-    }
-
-    [self addWhereItem:dict forKey:key];
-}
-
-- (void)whereKey:(NSString *)key
-    nearGeoPoint:(AVGeoPoint *)geoPoint
-     minDistance:(double)minDistance
- minDistanceUnit:(AVQueryDistanceUnit)minDistanceUnit
-{
-    [self whereKey:key nearGeoPoint:geoPoint maxDistance:-1 maxDistanceUnit:(AVQueryDistanceUnit)0 minDistance:minDistance minDistanceUnit:minDistanceUnit];
-}
-
-- (void)whereKey:(NSString *)key withinGeoBoxFromSouthwest:(AVGeoPoint *)southwest toNortheast:(AVGeoPoint *)northeast
-{
-    NSDictionary * dict = @{@"$within": @{@"$box" : @[[AVGeoPoint dictionaryFromGeoPoint:southwest], [AVGeoPoint dictionaryFromGeoPoint:northeast]]}};
     [self addWhereItem:dict forKey:key];
 }
 

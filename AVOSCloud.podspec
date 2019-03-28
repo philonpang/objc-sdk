@@ -38,7 +38,6 @@ Pod::Spec.new do |s|
     'AVOS/AVOSCloud/AVOSCloud.h',
     'AVOS/AVOSCloud/CloudCode/AVCloud.h',
     'AVOS/AVOSCloud/File/AVFile.h',
-    'AVOS/AVOSCloud/Geo/AVGeoPoint.h',
     'AVOS/AVOSCloud/Object/AVObject+Subclass.h',
     'AVOS/AVOSCloud/Object/AVObject.h',
     'AVOS/AVOSCloud/Object/AVRelation.h',
@@ -83,7 +82,6 @@ Pod::Spec.new do |s|
   s.ios.frameworks =
     'CFNetwork',
     'CoreGraphics',
-    'CoreLocation',
     'CoreTelephony',
     'MobileCoreServices',
     'QuartzCore',
@@ -91,21 +89,18 @@ Pod::Spec.new do |s|
     'SystemConfiguration'
 
   s.osx.frameworks =
-    'CoreLocation',
     'CoreServices',
     'SystemConfiguration'
 
   s.tvos.frameworks =
     'CFNetwork',
     'CoreGraphics',
-    'CoreLocation',
     'MobileCoreServices',
     'QuartzCore',
     'Security'
 
   s.watchos.frameworks =
     'CoreGraphics',
-    'CoreLocation',
     'MobileCoreServices',
     'Security'
 

@@ -9,7 +9,6 @@
 #import "AVRelation_Internal.h"
 #import "AVACL.h"
 #import "AVACL_Internal.h"
-#import "AVGeoPoint_Internal.h"
 #import "AVObjectUtils.h"
 #import "AVErrorUtils.h"
 #import "AVQuery_Internal.h"

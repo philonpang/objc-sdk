@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@class AVGeoPoint;
-
 NS_ASSUME_NONNULL_BEGIN
 
 /*!
@@ -61,27 +59,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  @see orderByDescending:withMode:andMissing:
  */
 - (void)orderByDescending:(NSString *)key;
-
-/*!
- * 按照地理位置信息远近排序,key对应的字段类型必须是GeoPoint。
- *
- *  @param key 排序的字段key
- *  @param point GeoPoint经纬度对象
- *  @param order 排序顺序，升序"asc"，降序"desc"，默认升序，也就是从近到远。
- *  @param mode 数组或者多值字段的排序模式，min表示取最小值，max取最大值，avg取平均值，默认值是avg。
- *  @param unit 距离单位，"m"表示米，"cm"表示厘米，"mm"表示毫米，"km"表示公里，"mi"表示英里，"in"表示英寸，"yd"表示英亩，默认"km"。
- */
-- (void)whereNear:(NSString *)key point:(AVGeoPoint *)point inOrder:(NSString *)order withMode:(NSString *)mode andUnit:(NSString *)unit;
-
-/*!
- *  @see whereNear:point:inOrder:withMode:andUnit
- */
-- (void)whereNear:(NSString *)key point:(AVGeoPoint *)point inOrder:(NSString *)order;
-
-/*!
- *  @see whereNear:point:inOrder:withMode:andUnit
- */
-- (void)whereNear:(NSString *)key point:(AVGeoPoint *)point;
 
 @end
 

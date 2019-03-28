@@ -12,7 +12,6 @@
 #import "AVUtils.h"
 #import "AVObject_Internal.h"
 #import "AVFile_Internal.h"
-#import "AVGeoPoint_Internal.h"
 #import "AVObjectUtils.h"
 #import "AVOSCloud_Internal.h"
 #import "AVLogger.h"

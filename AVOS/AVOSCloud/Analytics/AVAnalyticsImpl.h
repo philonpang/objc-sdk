@@ -61,7 +61,6 @@
 -(void)addException:(NSException *)exception;
 
 -(void)setLatitude:(double)latitude longitude:(double)longitude;
--(void)clearLocation;
 
 -(BOOL)isLocalEnabled;
 -(void)onlineConfigChanged:(id)object;

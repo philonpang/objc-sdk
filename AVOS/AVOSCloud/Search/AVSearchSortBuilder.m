@@ -7,7 +7,6 @@
 //
 
 #import "AVSearchSortBuilder.h"
-#import "AVGeoPoint.h"
 
 @implementation AVSearchSortBuilder
 
@@ -46,38 +45,6 @@
 - (void)orderByDescending:(NSString *)key withMode:(NSString *)mode andMissing:(NSString *)missing {
     [self addFiled:key inOder:@"desc" withMode:mode andMissing:missing];
 
-}
-
-- (void)whereNear:(NSString *)key point:(AVGeoPoint *)point {
-    [self whereNear:key point:point inOrder:@"asc"];
-}
-
-- (void)whereNear:(NSString *)key point:(AVGeoPoint *)point inOrder:(NSString *)order {
-    [self whereNear:key point:point inOrder:order withMode:@"avg" andUnit:@"km"];
-}
-
-- (void)whereNear:(NSString *)key point:(AVGeoPoint *)point inOrder:(NSString *)order withMode:(NSString *)mode andUnit:(NSString *)unit {
-    NSDictionary *geoDict = @{@"lat": @(point.latitude),
-                                     @"lon": @(point.longitude)};
-    
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setObject:geoDict forKey:key];
-    
-    if (unit) {
-        [dict setObject:unit forKey:@"unit"];
-    }
-    
-    if (mode) {
-        [dict setObject:mode forKey:@"mode"];
-    }
-    
-    if (order) {
-        [dict setObject:order forKey:@"order"];
-    }
-    
-    NSDictionary *field = @{@"_geo_distance": dict};
-    
-    [_sortFields addObject:field];
 }
 
 - (void)addFiled:(NSString *)key inOder:(NSString *)order withMode:(NSString *)mode andMissing:(NSString *)missing {

@@ -18,7 +18,6 @@
 #import "AVRole_Internal.h"
 #import "AVInstallation_Internal.h"
 #import "AVPaasClient.h"
-#import "AVGeoPoint_Internal.h"
 #import "AVRelation_Internal.h"
 #import "AVUtils.h"
 
@@ -134,14 +133,6 @@
     return data;
 }
 
-+(AVGeoPoint *)geoPointFromDictionary:(NSDictionary *)dict
-{
-    AVGeoPoint * point = [[AVGeoPoint alloc]init];
-    point.latitude = [[dict objectForKey:@"latitude"] doubleValue];
-    point.longitude = [[dict objectForKey:@"longitude"] doubleValue];
-    return point;
-}
-
 +(AVACL *)aclFromDictionary:(NSDictionary *)dict
 {
     AVACL * acl = [AVACL ACL];
@@ -185,11 +176,6 @@
     }
     else if ([AVObjectUtils isFile:type]) {
         return [[AVFile alloc] initWithRawJSONData:[dict mutableCopy]];
-    }
-    else if ([AVObjectUtils isGeoPoint:type])
-    {
-        AVGeoPoint * point = [AVObjectUtils geoPointFromDictionary:dict];
-        return point;
     }
     else if ([AVObjectUtils isDate:type])
     {
@@ -244,11 +230,6 @@
     else if ([AVObjectUtils isFile:type]) {
         AVFile *file = [[AVFile alloc] initWithRawJSONData:[dict mutableCopy]];
         [target setObject:file forKey:key submit:false];
-    }
-    else if ([AVObjectUtils isGeoPoint:type])
-    {
-        AVGeoPoint * point = [AVGeoPoint geoPointFromDictionary:dict];
-        [target setObject:point forKey:key submit:NO];
     }
     else if ([AVObjectUtils isACL:type] ||
              [AVObjectUtils isACL:key])
@@ -598,11 +579,6 @@
     return object;
 }
 
-+(NSDictionary *)dictionaryFromGeoPoint:(AVGeoPoint *)point
-{
-    return [AVGeoPoint dictionaryFromGeoPoint:point];
-}
-
 +(NSDictionary *)dictionaryFromDate:(NSDate *)date
 {
     NSString *strDate = [AVObjectUtils stringFromDate:date];
@@ -653,9 +629,7 @@
         } else {
             return [AVObjectUtils dictionaryFromAVObjectPointer:obj];
         }
-    } else if ([obj isKindOfClass:[AVGeoPoint class]]) {
-        return [AVObjectUtils dictionaryFromGeoPoint:obj];
-    } else if ([obj isKindOfClass:[NSDate class]]) {
+    }else if ([obj isKindOfClass:[NSDate class]]) {
         return [AVObjectUtils dictionaryFromDate:obj];
     } else if ([obj isKindOfClass:[NSData class]]) {
         return [AVObjectUtils dictionaryFromData:obj];

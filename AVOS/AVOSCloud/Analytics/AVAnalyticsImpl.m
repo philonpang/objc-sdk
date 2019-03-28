@@ -517,11 +517,6 @@ static NSString *const kAVOnlineConfig = @"AVOS_ONLINE_CONFIG";
     self.latitude = latitude;
 }
 
--(void)clearLocation {
-    self.latitude = 0;
-    self.longitude = 0;
-}
-
 -(void)debugDump {
     if (!self.enableDebugLog) {
         return;
